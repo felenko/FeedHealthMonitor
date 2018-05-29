@@ -1,0 +1,35 @@
+@using System.Security.Cryptography
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="react-app">Loading...</div>
+<div style="margin-left: 600px">
+    <table>
+        <col width="170">
+        <col width="500">
+        <tr>
+            <td><img src="@ViewData["FlightUpdateImage"]" style="height: 20px; width: 20px" />Flights (update)</td>
+            <td> last @ViewBag.LastFlightUpdateTime</td>
+        </tr>
+        <tr>
+            <td><img src="@ViewData["FlightInsertImage"]" style="height: 20px; width: 20px" />Flights (insert)</td>
+            <td>last @ViewBag.LastFlightInsertTime</td>
+        </tr>
+        <tr>
+            <td><img src="@ViewData["LoadPlanInsertImage"]" style="height: 20px; width: 20px" />LoadPlans (insert) </td>
+            <td>last @ViewBag.LastLoadPlanInsertTime</td>
+        </tr>
+        <tr>
+            <td><img src="@ViewData["AcarsInsertImage"]" style="height: 20px; width: 20px" />Acars (insert)</td>
+            <td>last @ViewBag.LastAcarsInsertTime</td>
+        </tr>
+        <tr>
+            <td><img src="@ViewData["LastError"]" style="height: 20px; width: 20px" />Last Error</td>
+            <td>last @ViewBag.LastErrorTime</td>
+        </tr>
+    </table>
+</div>
+    @section scripts {
+        <script src="~/dist/main.js" asp-append-version="true"></script>
+    }
