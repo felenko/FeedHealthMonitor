@@ -22,8 +22,8 @@ namespace FeedHealthMonitor.Controllers
         public IActionResult Index()
         {
             var logPath =   _configuration["Monitoring:Path"];
-            var directory = Directory.CreateDirectory(logPath);
-            var files = directory.GetFiles().OrderByDescending(f => f.LastWriteTime);
+            DirectoryInfo directory = Directory.CreateDirectory(logPath);
+            IOrderedEnumerable<FileInfo> files = directory.GetFilesWithSubfolders().OrderByDescending(f => f.LastWriteTime);
             var lastFlightUpdate = files.FirstOrDefault(f => f.Name.StartsWith("FlightUpdate"));
             var lastFlightInsert = files.FirstOrDefault(f => f.Name.StartsWith("FlightInsert"));
             var lastLoadPlanInsert = files.FirstOrDefault(f => f.Name.StartsWith("LoadPlan"));
@@ -97,6 +97,34 @@ namespace FeedHealthMonitor.Controllers
         {
             ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
             return View();
+        }
+
+       
+    }
+    public static class DirUtils
+    {
+        public static IEnumerable<FileInfo> GetFilesWithSubfolders(this DirectoryInfo dir)
+        {
+            IEnumerable<FileInfo> files = Enumerable.Empty<FileInfo>();
+
+            files = GetFilesFromSubfolders(dir);
+           
+            return files;
+        }
+
+        private static IEnumerable<FileInfo> GetFilesFromSubfolders(DirectoryInfo dir)
+        {
+            
+            var subdirs = dir.GetDirectories();
+            IEnumerable<FileInfo> retfiles = dir.GetFiles();
+            IEnumerable<FileInfo> files = Enumerable.Empty<FileInfo>();
+            foreach (var sdir in subdirs)
+            {
+               
+                retfiles = retfiles.Concat(GetFilesFromSubfolders(sdir)).ToArray();
+            }
+
+            return retfiles;
         }
     }
 }
