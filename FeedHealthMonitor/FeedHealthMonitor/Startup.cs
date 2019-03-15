@@ -12,6 +12,7 @@ namespace FeedHealthMonitor
 {
     public class Startup
     {
+        public static string RootPath { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +30,7 @@ namespace FeedHealthMonitor
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            RootPath = env.ContentRootPath;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -29,6 +29,7 @@
     <None Remove="ClientApp\Content\green_light.png" />
     <None Remove="ClientApp\Content\red_light.png" />
     <None Remove="ClientApp\Content\yellow_light.png" />
+    <None Remove="webpack.config.vendor.js" />
   </ItemGroup>
 
   <ItemGroup>

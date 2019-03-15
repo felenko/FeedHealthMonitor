@@ -28,6 +28,18 @@
             <td><img src="@ViewData["LastError"]" style="height: 20px; width: 20px" />Last Error</td>
             <td>last @ViewBag.LastErrorTime</td>
         </tr>
+        <tr>
+            <td>Last Error file:</td>
+            <td>@ViewBag.LastErrorFile</td>
+        </tr>
+        <tr>
+            <td><br /></td>
+            <td><br /></td>
+        </tr>
+        <tr>
+            <td><img src="@ViewData["MWStore"]" style="height: 20px; width: 20px" />Middleware store flights</td>
+            <td>has not processed flights: @ViewBag.FlightsInStore</td>
+        </tr>
     </table>
 </div>
     @section scripts {
